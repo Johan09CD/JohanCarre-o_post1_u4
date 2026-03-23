@@ -1,0 +1,158 @@
+# JohanCarreño-post1-u4
+
+## Proyecto: Patrones Chain of Responsibility y Command en Java
+
+Implementación de los patrones de diseño **Chain of Responsibility** y **Command**, aplicados a un sistema de gestión de pedidos, siguiendo la estructura definida en la guía del curso.
+
+---
+
+## Diagrama de composición (Chain of Responsibility)
+
+Cliente
+→ Cadena de validación
+→ ValidadorStock
+→ ValidadorCredito
+→ ValidadorFinal
+
+Cada validador:
+
+* Procesa la solicitud si cumple su condición
+* O la delega al siguiente en la cadena
+
+---
+
+## Flujo de validación
+
+El pedido pasa por diferentes validadores:
+
+1. Validación de stock
+2. Validación de crédito
+3. Aprobación final
+
+Si alguna validación falla, el proceso se detiene.
+
+---
+
+## Estructura principal (Chain)
+
+* **Handler (abstracto)**: define la estructura de la cadena
+* **ValidadorStock**: valida disponibilidad de productos
+* **ValidadorCredito**: valida estado crediticio
+* **ValidadorFinal**: confirma el pedido
+
+---
+
+## Diagrama de composición (Command)
+
+Cliente
+→ Invoker (GestorComandos)
+→ Command
+→ ComandoConfirmar
+→ ComandoAplicarDescuento
+→ Receiver (Pedido)
+
+---
+
+## Flujo de ejecución (Command)
+
+1. El cliente solicita una acción
+2. El invoker ejecuta el comando
+3. El comando modifica el pedido
+
+---
+
+## Estructura principal (Command)
+
+* **Command**: interfaz base
+* **ComandoConfirmar**: cambia el estado del pedido
+* **ComandoAplicarDescuento**: modifica el total
+* **Invoker**: ejecuta comandos
+* **Receiver (Pedido)**: objeto sobre el que actúan los comandos
+
+---
+
+## Checkpoints de verificación
+
+### Compilación
+
+Comando:
+
+```bash id="8ujp3x"
+mvn clean compile
+```
+
+Esperado:
+
+```id="lfk90a"
+BUILD SUCCESS
+```
+
+---
+
+### Pruebas unitarias
+
+Comando:
+
+```bash id="o0qk1j"
+mvn test
+```
+
+Esperado:
+
+* Todas las pruebas en verde
+* Validación correcta de la cadena
+* Ejecución de comandos sin errores
+
+---
+
+## Verificación funcional
+
+Las pruebas validan:
+
+* Ejecución correcta de la cadena de validación
+* Detención del flujo cuando falla una condición
+* Aplicación correcta de comandos sobre el pedido
+* Cambios de estado y total del pedido
+
+---
+
+## Cobertura de criterios de rúbrica
+
+### Aplicación de patrones
+
+* Uso correcto de Chain of Responsibility para validaciones
+* Uso de Command para encapsular acciones
+
+### Diseño orientado a objetos
+
+* Separación de responsabilidades
+* Bajo acoplamiento entre clases
+* Extensibilidad del sistema
+
+### Calidad y pruebas
+
+* Casos válidos e inválidos
+* Validación de flujo completo
+* Pruebas unitarias como evidencia
+
+---
+
+## Demostración de uso
+
+El comportamiento del sistema se evidencia mediante:
+
+* Pruebas unitarias con JUnit 5
+* Salida en consola del flujo de validación
+* Ejecución de comandos sobre pedidos
+
+---
+
+## Comandos útiles
+
+```bash id="nyufpz"
+mvn clean test
+mvn -q test
+```
+
+## Autor
+Johan Carreño
